@@ -5,9 +5,12 @@ public class App {
     private static final Scanner scanner = new Scanner(System.in);
     private static boolean isPhoneOn = true;
     private static CellPhone cellPhone;
+   
 
     public static void main(String[] args) throws Exception {
         cellPhone = new CellPhone();
+
+       
 
         while (isPhoneOn) {
             callCellMenu();
@@ -28,7 +31,11 @@ public class App {
         System.out.println("4. Available credit");
         System.out.println("5. Made calls counter");
         System.out.println("6. Reset calls");
-        System.out.println("7. Turn off");
+        System.out.println("7. Create contact");
+        System.out.println("8. Remove contact");
+        System.out.println("9. List contacts");
+        System.out.println("10. Slot machine");
+        System.out.println("11. Turn off");
     }
 
     private static void listenForInputs() {
@@ -42,7 +49,11 @@ public class App {
             case 4 -> handleCredit();
             case 5 -> handleMadeCalls();
             case 6 -> handleResetMadeCalls();
-            case 7 -> turnOffPhone();
+            case 7 -> handleCreateContact();
+            case 8 -> handleRemoveContact();
+            case 9 -> handleListContacts();
+            case 10 -> cellPhone.getSlotMachine().initializeSlotMachine();
+            case 11 -> turnOffPhone();
             default -> System.out.println("Invalid input");
         }
 
@@ -89,5 +100,27 @@ public class App {
     private static void turnOffPhone() {
         isPhoneOn = false;
     }
+
+    private static void handleCreateContact() {
+        System.out.println("Enter contact number: ");
+        String number = scanner.next();
+        System.out.println("Enter contact name: ");
+        String name = scanner.next();
+
+        cellPhone.getContacts().createContact(number, name);
+    }
+    
+    private static void handleRemoveContact() {
+        System.out.println("Enter contact number: ");
+        String number = scanner.next();
+
+        cellPhone.getContacts().removeContact(number);
+    }
+
+    private static void handleListContacts() {
+        cellPhone.getContacts().listContacts();
+    }
+
+   
 
 }
