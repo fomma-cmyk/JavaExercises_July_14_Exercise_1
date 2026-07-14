@@ -57,7 +57,7 @@ public class App {
             default -> System.out.println("Invalid input");
         }
 
-        System.out.println("\n\n\n");
+        System.out.println("\n");
     }
 
 
