@@ -32,7 +32,7 @@ public class Contacts {
             .findFirst()
             .orElse(null);
 
-        System.out.println("[DEBUG] " + contact);
+        // System.out.println("[DEBUG] " + contact);
 
         return contact;
     }
