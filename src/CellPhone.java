@@ -51,23 +51,31 @@ public class CellPhone {
     }
 
     public void callPerson (String number, int minutes) {
-        if (contacts.findContact(number) == null) {
-            System.out.println("[ERROR] Contact does not exist in your list");
-            return;
-        }
         if (this.rate <= 0) {
             System.out.println("[ERROR] You must set the rate before");
         }
-
+        
         float totalRate = this.rate * minutes;
         
         if (this.remainingCredit < totalRate) {
             // send sms
-            madeCalls.add(new MadeCall(contacts.findContact(number), false));
+            if (contacts.findContact(number) != null) {
+                madeCalls.add(new MadeCall(contacts.findContact(number), false));
+            } else {
+                madeCalls.add(new MadeCall(number, false));
+            }
+
             System.out.println("[SMS] Insufficient credit");
             return;
         }
         
+        if (contacts.findContact(number) == null) {
+            // System.out.println("[ERROR] Contact does not exist in your list");
+            madeCalls.add(new MadeCall(number, true));
+            return;
+        }
+
+
         this.remainingCredit -= totalRate;
         // System.out.println("[DEBUG] " + this.rate);
         // System.out.println("[DEBUG] " + minutes);
