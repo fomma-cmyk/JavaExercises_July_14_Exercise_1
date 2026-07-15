@@ -12,4 +12,6 @@ public class Contact {
         System.out.println("Phone number: " + number);
         System.out.println("Phone name: " + name);
     }
+
+    
 }

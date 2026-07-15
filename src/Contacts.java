@@ -20,7 +20,9 @@ public class Contacts {
     }
 
     public void listContacts() {
+        int i = 0;
         for (Contact c : contacts) {
+            System.out.println((++i) + ". ");
             c.printContact();
         }
     }
@@ -35,6 +37,13 @@ public class Contacts {
         // System.out.println("[DEBUG] " + contact);
 
         return contact;
+    }
+
+    public Contact getContactByIndex(int index) {
+        if (index < 0 || index >= contacts.size()) {
+            return null;
+        }
+        return contacts.stream().skip(index).findFirst().orElse(null);
     }
     
 }

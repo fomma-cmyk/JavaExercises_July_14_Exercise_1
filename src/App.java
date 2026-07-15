@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class App {
     private static final Scanner scanner = new Scanner(System.in);
-    private static boolean isPhoneOn = true;
+    public static boolean isPhoneOn = true;
     private static CellPhone cellPhone;
    
 
@@ -35,7 +35,8 @@ public class App {
         System.out.println("8. Remove contact");
         System.out.println("9. List contacts");
         System.out.println("10. Slot machine");
-        System.out.println("11. Turn off");
+        System.out.println("11. Call by contacts index");
+        System.out.println("12. Turn off");
     }
 
     

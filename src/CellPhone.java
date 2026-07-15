@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class CellPhone {
     private static final Scanner scanner = new Scanner(System.in);
-    private static boolean isPhoneOn = true;
     private float remainingCredit;
     private HashSet<MadeCall> madeCalls = new HashSet<>();
     private float rate;
@@ -127,7 +126,8 @@ public class CellPhone {
             case 8 -> handleRemoveContact();
             case 9 -> handleListContacts();
             case 10 -> slotMachine.initializeSlotMachine();
-            case 11 -> turnOffPhone();
+            case 11 -> handleCallByContactIndex();
+            case 12 -> turnOffPhone();
             default -> System.out.println("Invalid input");
         }
 
@@ -158,6 +158,23 @@ public class CellPhone {
         callPerson(number, minutes);
     }
 
+    private void handleCallByContactIndex() {
+        getContacts().listContacts();
+        System.out.println("Enter contact index: ");
+        int index = scanner.nextInt() - 1; 
+
+        Contact contact = getContacts().getContactByIndex(index);
+        if (contact == null) {
+            System.out.println("[ERROR] Contact not found");
+            return;
+        }
+
+        System.out.println("Enter call duration in minutes");
+        int minutes = scanner.nextInt();
+
+        callPerson(contact.number, minutes);
+    }
+
     private void handleCredit()
     {
         checkAvailableCredit();
@@ -172,7 +189,7 @@ public class CellPhone {
     }
 
     private void turnOffPhone() {
-        isPhoneOn = false;
+        App.isPhoneOn = false;
     }
 
     private void handleCreateContact() {
